@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Access Test</title>
+</head>
+<body>
+    <h1>Camera Access with Image</h1>
+    <img src="your-image.jpg" alt="Test Image" width="500">
+    <div id="camera-container">
+        <video id="video" width="640" height="480" autoplay></video>
+    </div>
+
+    <script>
+        async function startCamera() {
+            try {
+                // Запрашиваем доступ к камере
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Ошибка доступа к камере:', error);
+                alert('Камера не доступна или доступ был отклонен.');
+            }
+        }
+
+        // Запускаем функцию при загрузке страницы
+        window.onload = startCamera;
+    </script>
+</body>
+</html>
